@@ -34,4 +34,12 @@ public class ObjectFile {
     public int hashCode() {
         return Objects.hash(name, email);
     }
+
+    @Override
+    public String toString() {
+        return "ObjectFile{" +
+                "name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                '}';
+    }
 }

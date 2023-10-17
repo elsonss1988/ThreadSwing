@@ -15,27 +15,29 @@ public class ImplementacaoFilaThread extends Thread{
 
 
     public void run(){
-        Iterator iterator = pilhaFilha.iterator();
-        synchronized (iterator) {
+        while(true){
+            synchronized (pilhaFilha) {
+                Iterator iterator = pilhaFilha.iterator();
 
 
-            while (iterator.hasNext()) {
-                ObjectFile processar = (ObjectFile) iterator.next();
+                while (iterator.hasNext()) {
+                    ObjectFile processar = (ObjectFile) iterator.next();
 
-                System.out.println("-------------------------");
-                System.out.println(processar.toString());
+                    System.out.println("-------------------------");
+                    System.out.println(processar.toString());
 
-                iterator.remove();
-                try {
-                    Thread.sleep(100);
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
-                }
+                    iterator.remove();
+                    try {
+                        Thread.sleep(100);
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
 
-                try {
-                    Thread.sleep(500);
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
+                    try {
+                        Thread.sleep(500);
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
                 }
             }
         }

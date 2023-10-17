@@ -12,13 +12,21 @@ public class TelaTimeThread extends JDialog{
     private JPanel jPanel = new JPanel(new GridBagLayout());
     private JLabel descricaoHora = new JLabel("Time Thread 1");
     private JLabel descricaoHora2 = new JLabel("Time Thread 2");
+
     private JTextField mostraTempo = new JTextField();
     private JTextField mostraTempo2 = new JTextField();
+    private JLabel name = new JLabel("nome");
+    private JLabel email = new JLabel("email");
+    private JTextField nameField = new JTextField();
+    private JTextField emailField = new JTextField();
 
     private  JButton startButton = new JButton("Start");
     private  JButton stopButton = new JButton("Stop");
     private Thread thread1Time;
     private Thread thread2Time;
+
+    private  ImplementacaoFilaThread  queue = new ImplementacaoFilaThread();
+
     private Runnable thread = new Runnable() {
         @Override
         public void run() {
@@ -49,7 +57,7 @@ public class TelaTimeThread extends JDialog{
     };
     TelaTimeThread(){
         setTitle(title);
-        setSize( new Dimension(300,300));
+        setSize( new Dimension(400,350));
 
         setLocationRelativeTo(null);
         setResizable(false);
@@ -78,9 +86,30 @@ public class TelaTimeThread extends JDialog{
 
         mostraTempo2.setPreferredSize(new Dimension(200,25));
         gridBagConstraints.gridy++;
-        mostraTempo2.setHorizontalAlignment((int) CENTER_ALIGNMENT);
+        mostraTempo2.setHorizontalAlignment(SwingConstants.CENTER);
         mostraTempo2.setEditable(false);
         jPanel.add(mostraTempo2, gridBagConstraints);
+
+        name.setPreferredSize(new Dimension(200,25));
+        name.setHorizontalAlignment(SwingConstants.CENTER);
+        gridBagConstraints.gridy++;
+        jPanel.add(name,gridBagConstraints);
+
+        nameField.setPreferredSize(new Dimension(200,25));
+        nameField.setHorizontalAlignment(SwingConstants.CENTER);
+        gridBagConstraints.gridy++;
+        jPanel.add(nameField,gridBagConstraints);
+
+        email.setPreferredSize(new Dimension(200,25));
+        email.setHorizontalAlignment(SwingConstants.CENTER);
+        gridBagConstraints.gridy++;
+        jPanel.add(email, gridBagConstraints);
+
+        emailField.setPreferredSize(new Dimension(200,25));
+        emailField.setHorizontalAlignment(SwingConstants.CENTER);
+        gridBagConstraints.gridy++;
+        jPanel.add(emailField,gridBagConstraints);
+
 
         gridBagConstraints.gridwidth = 1;
 
@@ -99,7 +128,12 @@ public class TelaTimeThread extends JDialog{
                 thread1Time.start();
                 thread2Time.start();
                 stopButton.setEnabled(true);
-                startButton.setEnabled(false);
+
+                ObjectFile queueThread = new ObjectFile();
+                queueThread.setName(nameField.getText());
+                queueThread.setEmail(emailField.getText());
+                queue.add(queueThread);
+
             }
         });
 
@@ -115,6 +149,7 @@ public class TelaTimeThread extends JDialog{
 
         stopButton.setEnabled(false);
 
+        queue.start();
         add(jPanel,BorderLayout.CENTER);
         setVisible(true);
     }
