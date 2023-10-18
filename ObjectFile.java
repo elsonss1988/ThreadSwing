@@ -37,9 +37,7 @@ public class ObjectFile {
 
     @Override
     public String toString() {
-        return "ObjectFile{" +
-                "name='" + name + '\'' +
-                ", email='" + email + '\'' +
-                '}';
+        return
+                "name=" + name + ", email=" + email ;
     }
 }

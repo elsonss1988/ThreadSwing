@@ -24,7 +24,7 @@ public class ImplementacaoFilaThread extends Thread{
                     ObjectFile processar = (ObjectFile) iterator.next();
 
                     System.out.println("-------------------------");
-                    System.out.println(processar.toString());
+                    System.out.println(processar.toString()+" Magic Number is : "+Math.random());
 
                     iterator.remove();
                     try {

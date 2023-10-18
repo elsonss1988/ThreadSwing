@@ -128,11 +128,16 @@ public class TelaTimeThread extends JDialog{
                 thread1Time.start();
                 thread2Time.start();
                 stopButton.setEnabled(true);
-
-                ObjectFile queueThread = new ObjectFile();
-                queueThread.setName(nameField.getText());
-                queueThread.setEmail(emailField.getText());
-                queue.add(queueThread);
+                if(queue == null) {
+                    queue= new ImplementacaoFilaThread();
+                    queue.start();
+                }
+                for(int quant = 0; quant<100; quant++) {
+                    ObjectFile queueThread = new ObjectFile();
+                    queueThread.setName(nameField.getText());
+                    queueThread.setEmail(emailField.getText());
+                    queue.add(queueThread);
+                }
 
             }
         });
@@ -144,6 +149,8 @@ public class TelaTimeThread extends JDialog{
                 thread2Time.stop();
                 stopButton.setEnabled(false);
                 startButton.setEnabled(true);
+
+                queue = null;
             }
         });
 
